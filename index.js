@@ -111,7 +111,7 @@ async function run(){
 run().catch(err=>console.error(err))
 
 app.get('/',(req,res)=>{
-    res.send('server is running')
+    res.send('server is runing')
 })
 app.listen(port,()=>{
     console.log(`server is running ${port}`)
