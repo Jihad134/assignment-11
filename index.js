@@ -4,13 +4,7 @@ const cors=require('cors')
 require('dotenv').config()
 const app=express()
 const port=process.env.PORT || 5000
-const corsOptions ={
-    origin:'*', 
-    credentials:true,    
-    optionSuccessStatus:200,
- }
- 
- app.use(cors(corsOptions))
+ app.use(cors())
 app.use(express.json())
 
 
@@ -49,18 +43,19 @@ async function run(){
             const order=await cursor.toArray()
             res.send(order)
         })
-        app.post('/review',async(req,res)=>{
+        app.post('/reviews',async(req,res)=>{
             const order=req.body
             const result=await orderCollection.insertOne(order) 
             res.send(result)
         })
-        app.delete('/review/:id',async(req,res)=>{
+        app.delete('/reviews/:id',async(req,res)=>{
             const id=req.params.id
+            console.log(id)
             const query={_id:ObjectId(id)}
             const result=await orderCollection.deleteOne(query)
             res.send(result)
         })
-        app.put("/review/:id",async(req,res)=>{
+        app.put("/reviews/:id",async(req,res)=>{
             const id=req.params.id
             const query={_id:ObjectId(id)}
             const user =req.body
